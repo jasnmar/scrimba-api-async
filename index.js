@@ -10,61 +10,22 @@ async function getDeck(e) {
         method: "GET"
     })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            console.log(data)
+            const deckId = data.deck_id
+            console.log(deckId)
+
+        })
 }
-
-const promise = fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/")
-console.log(promise)
-const p = promise.then()
-console.log(p)
-
 /**
- * Mini challenge: Figure out what `promise.then()` returns! 
- * Save the result to a variable and log it to the console.
- */
-    // .then(data => console.log(data))
-
-    /* 
-- Promises are in one of 3 states at any given time
-    - Pending
-    - Fulfilled
-    - Rejected
-*/
-
-/**
- * Time to be curious!
+ * Challenge
  * 
- * What would happen if you didn't return `res.json()` 
- * from the first .then block?
+ * Background:
+ * The Deck of Cards API expects us to provide the deck id 
+ * of the deck we're playing with so it can remember which
+ * cards we've already drawn, how many are remaining in the
+ * deck, etc.
  * 
- * What would the next .then() callback receive as its 
- * parameter if you returned something totally different??
+ * Task: save the deck_id from the returned data to a local
+ * variable so we can use it later
  */
-
-fetch("https://apis.scrimba.com/bored/api/activity")
-    .then(function(res) {
-        return "res dot jason"
-    })
-    .then(function(element) {
-        console.log(element)
-        
-    })
-
-    /**
- * Challenge:
- * 
- * pass the string "World" down to a 3rd .then() block
- * and log it to the console inside the body of this new
- * 3rd .then() block
- */
-    fetch("https://apis.scrimba.com/bored/api/activity")
-    .then(function(res) {
-        return "Hello"
-    })
-    .then(function(whatever) {
-        console.log(whatever)
-        return "World"
-    })
-    .then(function(stuffs) {
-        console.log(stuffs)
-    })
