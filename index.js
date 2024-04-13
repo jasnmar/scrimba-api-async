@@ -105,5 +105,12 @@ function filterArray(array, callback) {
     return resultingArray
 }
 
-// We'll do this later
-// const peopleWithPets = filterArray(people, /*???*/)
+/**
+ * Challenge: Use your filter array method!
+ * Given the above `people` array, return a new array with only people where `hasPet` is true
+ * Note: Remember that your callback function will be given the individual item in the array for a parameter
+ */
+
+const peopleWithPets = filterArray(people, person => person.hasPet)
+console.log(peopleWithPets)
+
