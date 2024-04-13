@@ -1,16 +1,15 @@
 /**
- Challenge: Add a button that, when clicked, gets a new deck of cards from the deckofcards API
- 
- URL: https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/
- 
- Log the whole response to the console
+ * Challenge: Define our anonymous callback function as a separate function, then
+ * pass it as the 2nd parameter to our `addEventListener`
  */
 
-const getDeckBtn = document.getElementById("get-deck")
+//I did it this way to start
+
+const getDeckBtn = document.getElementById("new-deck")
 
 getDeckBtn.addEventListener("click", getDeck)
 
-function getDeck(e) {
+async function getDeck(e) {
     e.preventDefault()
     fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
         method: "GET"
