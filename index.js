@@ -41,10 +41,10 @@ async function getDeck(e) {
  * Part 2: Move the anonymous in-line function to its own, named function
  */
 const people = [
-    { name: "Jack", hasPet: true },
-    { name: "Jill", hasPet: false },
-    { name: "Alice", hasPet: true },
-    { name: "Bob", hasPet: false },
+    { name: "Jack", hasPet: true, age: 12 },
+    { name: "Jill", hasPet: false, age: 18 },
+    { name: "Alice", hasPet: true, age: 22 },
+    { name: "Bob", hasPet: false, age: 32 },
 ]
 
 const petPeople = people.filter(peopleTest)
@@ -53,3 +53,18 @@ function peopleTest(person){
     return person.hasPet === true
 }
 console.log(petPeople)
+
+// https://www.javascripttutorial.net/javascript-array-filter
+
+/**
+ * Extra challenge to practice array.filter:
+ * 
+ * Using .filter, create a new array of people who are 18 and older
+ * (should be Jill, Alice, and Bob)
+ */
+
+function ageTest(person) {
+    return person.age>17
+}
+const adults = people.filter(ageTest)
+console.log(adults)
