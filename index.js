@@ -17,3 +17,18 @@ async function getDeck(e) {
         .then(res => res.json())
         .then(data => console.log(data))
 }
+
+/**
+ * Challenge: 
+ * 
+ * Part 1: write a `setTimeout` command. Have it wait for 2000 ms before logging "I finally ran!" to the console
+ * 
+ * Part 2: Upcoming...
+ */
+
+setTimeout(cLogSomething, 2000);
+
+function cLogSomething() {
+    console.log("I finally ran")
+}
+
