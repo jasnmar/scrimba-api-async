@@ -26,9 +26,30 @@ async function getDeck(e) {
  * Part 2: Upcoming...
  */
 
-setTimeout(cLogSomething, 2000);
+// setTimeout(cLogSomething, 2000);
 
-function cLogSomething() {
-    console.log("I finally ran")
+// function cLogSomething() {
+//     console.log("I finally ran")
+// }
+
+/**
+ * Challenge: 
+ * 
+ * Part 1: Given the array of objects below, create a new array with the `.filter()` array method that contains only the objects where "hasPet" is true
+ * 
+ * 
+ * Part 2: Move the anonymous in-line function to its own, named function
+ */
+const people = [
+    { name: "Jack", hasPet: true },
+    { name: "Jill", hasPet: false },
+    { name: "Alice", hasPet: true },
+    { name: "Bob", hasPet: false },
+]
+
+const petPeople = people.filter(peopleTest)
+
+function peopleTest(person){
+    return person.hasPet === true
 }
-
+console.log(petPeople)
