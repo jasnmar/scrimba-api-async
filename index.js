@@ -13,7 +13,7 @@ async function getDeck(e) {
     })
         .then(res => res.json())
         .then(data => {
-            document.getElementById('remaining-cards').innerHTML = data.remaining + " Cards Left"
+            cardCount(data)
             console.log(data)
             deckId = data.deck_id
             console.log(deckId)
@@ -23,9 +23,12 @@ async function getDeck(e) {
 /**
  * Challenge:
  * 
- * Display the number of cards remaining in the deck on the page
- * Hint: Check the data that comes back when we draw 2 new cards
- * to see if there's anything helpful there for this task (😉)
+ * Disable the Draw button when we have no more cards to draw from
+ * in the deck.
+ * 
+ * Disable both the functionality of the button (i.e. change
+ * `disabled` to true on the button) AND the styling (i.e. add
+ * a `disabled` CSS class to make it look unclickable)
  */
 
 async function draw2() {
@@ -43,7 +46,7 @@ async function draw2() {
             cardDivs[i].innerHTML = `<img src="${cards[i].images.png}">`
         }
         document.getElementById("winner-text").innerHTML = winningCard(cards[0].value, cards[1].value)
-        document.getElementById('remaining-cards').innerHTML = data.remaining + " Cards Left"
+        cardCount(data)
     })
 }
 
@@ -79,6 +82,28 @@ const cardEquivalents = [
     {name: "ACE", number: 14 },
 
 ]
+
+function cardCount(cardData) {
+    document.getElementById('remaining-cards').innerHTML = cardData.remaining + " Cards Left"
+    if(cardData.remaining <= 0) {
+        disableDraw()
+    } else {
+        enableDraw()
+        
+    }
+}
+
+function disableDraw() {
+    const drawBtn = document.getElementById("draw-cards")
+    drawBtn.disabled = true;
+    drawBtn.classList.add('disabled')
+}
+
+function enableDraw() {
+    const drawBtn = document.getElementById("draw-cards")
+    drawBtn.disabled = false;
+    drawBtn.classList.remove('disabled')
+}
 /*
 {
     "success": true,

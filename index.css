@@ -23,7 +23,9 @@ h2 {
     border-radius: 7px;
     margin: 10px auto;
 }
-
+.disabled{
+    background-color: darkgoldenrod;
+}
 img, .card {
     width: 100px;
     height: 140px;
