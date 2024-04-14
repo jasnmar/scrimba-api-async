@@ -11,36 +11,34 @@ drawCardsBtn.addEventListener("click", draw2)
 
 async function getDeck(e) {
     e.preventDefault()
-    fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
+    const res = await fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
         method: "GET"
     })
-        .then(res => res.json())
-        .then(data => {
-            cardCount(data)
-            console.log(data)
-            deckId = data.deck_id
-            console.log(deckId)
+    const data = await res.json()
+    cardCount(data)
+    console.log(data)
+    deckId = data.deck_id
+    console.log(deckId)
 
-        })
-}
+    }
+
 
 async function draw2() {
-    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
+    const res = await fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
         method: "GET"
     })
-    .then(res => res.json())
-    .then(data => {
-        const cards = data.cards
-        console.log(data)
-        const cardsDiv = document.getElementById("cards")
-        let cardDivs = document.querySelectorAll("#cards > div")
+    const data = await res.json()
 
-        for(let i = 0; i < cardDivs.length; i++) {
-            cardDivs[i].innerHTML = `<img src="${cards[i].images.png}">`
-        }
-        winnerText.innerHTML = winningCard(cards[0].value, cards[1].value)
-        cardCount(data)
-    })
+    const cards = data.cards
+    console.log(data)
+    const cardsDiv = document.getElementById("cards")
+    let cardDivs = document.querySelectorAll("#cards > div")
+
+    for(let i = 0; i < cardDivs.length; i++) {
+        cardDivs[i].innerHTML = `<img src="${cards[i].images.png}">`
+    }
+    winnerText.innerHTML = winningCard(cards[0].value, cards[1].value)
+    cardCount(data)
 }
 
 function winningCard(card1, card2) {
@@ -109,37 +107,8 @@ function enableDraw() {
     drawBtn.classList.remove('disabled')
 }
 /*
-{
-    "success": true,
-    "deck_id": "ggwjlsdycsgn",
-    "cards": [
-        {
-            "code": "6D",
-            "image": "https://deckofcardsapi.com/static/img/6D.png",
-            "images": {
-                "svg": "https://deckofcardsapi.com/static/img/6D.svg",
-                "png": "https://deckofcardsapi.com/static/img/6D.png"
-            },
-            "value": "6",
-            "suit": "DIAMONDS"
-        },
-        {
-            "code": "QH",
-            "image": "https://deckofcardsapi.com/static/img/QH.png",
-            "images": {
-                "svg": "https://deckofcardsapi.com/static/img/QH.svg",
-                "png": "https://deckofcardsapi.com/static/img/QH.png"
-            },
-            "value": "QUEEN",
-            "suit": "HEARTS"
-        }
-    ],
-    "remaining": 50
-}
-*/
 /**
  * Challenge:
  * 
- * Display the final winner in the header at the top by
- * replacing the text of the h2.
+ * Change async operations below to use async/await instead of .then()
  */
