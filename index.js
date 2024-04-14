@@ -28,6 +28,17 @@ async function draw2() {
     .then(data => {
         console.log(data)
         const cards = data.cards
+        const card1Div = document.getElementById("card1")
+        const card2Div = document.getElementById("card2")
+        card1Div.innerHTML = ""
+        card2Div.innerHTML = ""
+        const card1Img = document.createElement("img")
+        const card2Img = document.createElement("img")
+        card1Img.src = cards[0].images.png
+        card2Img.src = cards[1].images.png
+        card1Div.appendChild(card1Img)
+        card2Div.appendChild(card2Img)
+        
         cards.forEach(card => {
             console.log(card.value+card.suit)
         });
@@ -63,18 +74,15 @@ async function draw2() {
 }
 */
 /**
- * Challenge
+ * Challenge:
  * 
- * Task: Using the saved deckId, draw 2 new cards from the deck
+ * Start making this look lots nicer :)
  * 
- * Docs for original Deck of Cards API: https://deckofcardsapi.com/#draw-card
- * BaseUrl you'll use: https://apis.scrimba.com/deckofcards/api/deck/
- * (that will replace the base url of https://deckofcardsapi.com/api/deck/)
- * that you'll see in the deck of cards API docs.
- * 
- * 1. Create a new button that, when clicked, draws 2 cards from the deckId
- * you have saved
- *      Note: you'll need to get a new deck every time you refresh the page,
- *      since you're only saving your deckId in a local variable right now
- * 2. Log those 2 cards to the console
+ * 1. Add a card table background with the img/table.png image provided.
+ * 2. Move the draw button to the very bottom of the page, full width
+ * 3. Add some button styles. You can use the photo on the slides
+ * for one option.
  */
+
+
+
