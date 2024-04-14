@@ -15,7 +15,9 @@ button {
     font-weight: bold;
     border-radius: 8px;
 }
-
+h2 {
+    margin: 20px auto;
+}
 .card {
     border: 2px solid black;
     border-radius: 7px;
