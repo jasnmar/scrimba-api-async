@@ -6,7 +6,7 @@ const drawCardsBtn = document.getElementById("draw-cards")
 getDeckBtn.addEventListener("click", getDeck)
 drawCardsBtn.addEventListener("click", draw2)
 
-async function getDeck(e) {
+function getDeck(e) {
     e.preventDefault()
     fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
         method: "GET"
@@ -20,7 +20,7 @@ async function getDeck(e) {
         })
 }
 
-async function draw2() {
+function draw2() {
     fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
         method: "GET"
     })
@@ -28,10 +28,28 @@ async function draw2() {
     .then(data => {
         console.log(data)
         const cards = data.cards
+        renderCards(cards)
         cards.forEach(card => {
+            
             console.log(card.value+card.suit)
         });
     })
+}
+
+function renderCards(cardsArray) {
+    if(cardsArray) {
+        const card1Div = document.getElementById("card1")
+        const card2Div = document.getElementById("card2")
+        card1Div.innerHTML = ""
+        card2Div.innerHTML = ""
+        const card1Img = document.createElement("img")
+        const card2Img = document.createElement("img")
+        card1Img.src = cardsArray[0].images.png
+        card2Img.src = cardsArray[1].images.png
+        card1Div.appendChild(card1Img)
+        card2Div.appendChild(card2Img)
+        
+    }
 }
 /*
 {
