@@ -1,7 +1,10 @@
 let deckId
+let computerScore = 0
+let userScore = 0
 
 const getDeckBtn = document.getElementById("new-deck")
 const drawCardsBtn = document.getElementById("draw-cards")
+const winnerText = document.getElementById("winner-text")
 
 getDeckBtn.addEventListener("click", getDeck)
 drawCardsBtn.addEventListener("click", draw2)
@@ -20,16 +23,6 @@ async function getDeck(e) {
 
         })
 }
-/**
- * Challenge:
- * 
- * Disable the Draw button when we have no more cards to draw from
- * in the deck.
- * 
- * Disable both the functionality of the button (i.e. change
- * `disabled` to true on the button) AND the styling (i.e. add
- * a `disabled` CSS class to make it look unclickable)
- */
 
 async function draw2() {
     fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
@@ -45,7 +38,7 @@ async function draw2() {
         for(let i = 0; i < cardDivs.length; i++) {
             cardDivs[i].innerHTML = `<img src="${cards[i].images.png}">`
         }
-        document.getElementById("winner-text").innerHTML = winningCard(cards[0].value, cards[1].value)
+        winnerText.innerHTML = winningCard(cards[0].value, cards[1].value)
         cardCount(data)
     })
 }
@@ -57,8 +50,12 @@ function winningCard(card1, card2) {
     const c1Number = cardEquivalents.find(x => x.name===card1).number
     const c2Number = cardEquivalents.find(x => x.name===card2).number
     if(c1Number>c2Number) {
+        computerScore++
+        document.getElementById("computer-score").textContent = computerScore
         return "Computer wins!"
     } else if(c2Number>c1Number) {
+        userScore++
+        document.getElementById("user-score").textContent = userScore
         return "You win!"
     } else {
         return "War"
@@ -87,6 +84,13 @@ function cardCount(cardData) {
     document.getElementById('remaining-cards').innerHTML = cardData.remaining + " Cards Left"
     if(cardData.remaining <= 0) {
         disableDraw()
+        if(computerScore>userScore) {
+            winnerText.innerHTML = "The Computer Won The Game!"
+        } else if(userScore>computerScore) {
+            winnerText.innerHTML = "You Won The Game!"
+        } else {
+            winnerText.innerHTML = "The Game Was a Tie"
+        }
     } else {
         enableDraw()
         
@@ -136,15 +140,6 @@ function enableDraw() {
 /**
  * Challenge:
  * 
- * Try to determine which of the 2 cards is the "winner" (has higher value)
- * Aces are the card with the highest "score"
- * 
- * Part 2:
- * Instead of logging the winner to the console, 
- * display an `h2` on the screen above the 2 cards 
- * that declares who the winner is.
- * 
- * If card1 is the higher card, display "Computer wins!"
- * If card2 is the higher card, display "You win!"
- * If they're equal, display "War!"
+ * Display the final winner in the header at the top by
+ * replacing the text of the h2.
  */
