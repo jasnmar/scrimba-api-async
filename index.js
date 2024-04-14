@@ -29,6 +29,7 @@ function draw2() {
         console.log(data)
         const cards = data.cards
         renderCards(cards)
+        findWinner(cards)
         cards.forEach(card => {
             
             console.log(card.value+card.suit)
@@ -51,6 +52,43 @@ function renderCards(cardsArray) {
         
     }
 }
+
+function findWinner(cardsArray) {
+    cardsArray.forEach(card => {
+        card.numericVal = cardValues.find(function(item) {
+            if(item.name === card.value) {
+                console.log(item.value)
+                return item.value
+            }
+        }).value
+        
+    });
+    console.log(cardsArray)
+    if (cardsArray[0].numericVal > cardsArray[1].numericVal) {
+        console.log("Computer Wins")
+    } else if (cardsArray[0].value < cardsArray[1].numericVal) {
+        console.log("Player Wins")
+    } else {
+        console.log("tie")
+    }
+}
+
+const cardValues = [
+    { name: "1", value: 1 },
+    { name: "2", value: 2 },
+    { name: "3", value: 3 },
+    { name: "4", value: 4 },
+    { name: "5", value: 5 },
+    { name: "6", value: 6 },
+    { name: "7", value: 7 },
+    { name: "8", value: 8 },
+    { name: "9", value: 9 },
+    { name: "10", value: 10},
+    { name: "JACK", value: 11},
+    { name: "QUEEN", value: 12},
+    { name: "KING", value: 13},
+    { name: "ACE", value: 14}
+]
 /*
 {
     "success": true,
