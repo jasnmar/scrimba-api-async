@@ -26,18 +26,13 @@ async function draw2() {
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data)
         const cards = data.cards
-        const card1Div = document.getElementById("card1")
-        const card2Div = document.getElementById("card2")
-        card1Div.innerHTML = ""
-        card2Div.innerHTML = ""
-        const card1Img = document.createElement("img")
-        const card2Img = document.createElement("img")
-        card1Img.src = cards[0].images.png
-        card2Img.src = cards[1].images.png
-        card1Div.appendChild(card1Img)
-        card2Div.appendChild(card2Img)
+        const cardsDiv = document.getElementById("cards")
+        let cardDivs = document.querySelectorAll("#cards > div")
+
+        for(let i = 0; i < cardDivs.length; i++) {
+            cardDivs[i].innerHTML = `<img src="${cards[i].images.png}">`
+        }
         
         cards.forEach(card => {
             console.log(card.value+card.suit)
@@ -76,7 +71,12 @@ async function draw2() {
 /**
  * Challenge:
  * 
- * Create a spot in the HTML for the cards to be placed in.
- * Typical playing cards have a 5:7 ratio (width-to-height).
+ * Place each of the cards we draw into its respective card-slot
+ * Hint: consider using element.children in the DOM instead of
+ * giving each card-slot its own unique ID
+ * 
+ * https://developer.mozilla.org/en-US/docs/Web/API/Element/children
  */
-
+//From the beginning I started with a div for each card.
+//The instructor did not, so this might will be a bit of a
+//dumb refactor.
