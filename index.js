@@ -7,32 +7,33 @@ getDeckBtn.addEventListener("click", getDeck)
 drawCardsBtn.addEventListener("click", draw2)
 
 async function getDeck(e) {
-    e.preventDefault()
-    fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
+    if(e) {
+        e.preventDefault()
+    }
+    const res = await fetch("https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/", {
         method: "GET"
     })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            deckId = data.deck_id
-            console.log(deckId)
-
-        })
+    const data = await res.json()
+    deckId = data.deck_id
 }
 
 async function draw2() {
-    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
+    if(!deckId) {
+        await getDeck()
+    }
+    const res = await fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`, {
         method: "GET"
     })
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
+    const data = await res.json()
+    console.log(data)
+    if(data.success) {
         const cards = data.cards
         cards.forEach(card => {
             console.log(card.value+card.suit)
         });
-    })
+    }
 }
+
 /*
 {
     "success": true,
