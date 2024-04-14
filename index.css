@@ -5,6 +5,7 @@ body, html {
     background-color: green;
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 button {
@@ -13,6 +14,17 @@ button {
     padding: 6px 12px;
     font-weight: bold;
     border-radius: 8px;
+}
+
+.card {
+    border: 2px solid black;
+    border-radius: 7px;
+    margin: 10px auto;
+}
+
+img, .card {
+    width: 100px;
+    height: 140px;
 }
 
 #draw-cards {
